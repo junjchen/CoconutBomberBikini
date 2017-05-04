@@ -1,0 +1,23 @@
+{
+  "name": "coconutbomberbikini",
+  "version": "1.0.0",
+  "description": "open data innovation coursework2; home made food share application;",
+  "main": "index.js",
+  "scripts": {
+    "start": "http-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yukisong192517/coconutbomberbikini.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yukisong192517/coconutbomberbikini/issues"
+  },
+  "homepage": "https://github.com/yukisong192517/coconutbomberbikini#readme",
+  "devDependencies": {
+    "http-server": "^0.10.0"
+  }
+}
