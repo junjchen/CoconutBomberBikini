@@ -18,6 +18,7 @@ function queryNutriApi(query) {
         return res.json();
     }).
     then(function (data) {
+        console.log(data.food);
         return data.foods.reduce(function (previous, current) {
             var name = current.food_name;
             if (!previous[name]) {
@@ -48,23 +49,40 @@ function getAppData() {
             }
         ]
     }];
-
-    var getFoodCalories = function (food) {
-        return queryNutriApi(food.recipe).then(function (n) {
-            food.nutritions = n;
-            return food;
+    var getFoodArr = function(demoData,homeName){
+        for(var key in demoData)
+        {
+            if(demoData[key].name === homeName)
+            {
+                var food = demoData[key].foods;
+                return food;//search a restaurant and return its food menu array
+            }
+        };
+    }
+    var getFoodCalories = function (recipeName) {
+        return queryNutriApi(recipeName.recipe).then(function (n) {
+            recipeName.nutritions = n;
+            return recipeName;//for each recipe after adding nutrition ,return the recipe Obj
         })
     }
+    var getRestaurantFoodCalories = function(homeName){
+        var food = getFoodArr(demoData,homeName);
+        var recipeObj = food.map(function(f){
+        return getFoodCalories(f);
+        })
+        return recipeObj;//adding nutritions to all recipes in restaurant
+    }
+    
 
-    var getResFoodCalories = function (resaurants) {
+ /*   var getResFoodCalories = function (resaurants) {
         return [].concat.apply([], restaurants.map(function (r) {
             return r.foods.map(function (f) {
                 return getFoodCalories(f);
             });
         }));
-    }
+    }*/
 
-    Promise.all(getFoodCalories(demoData)).then(function (result) {
+   Promise.all(getRestaurantFoodCalories('Vivian Home')).then(function (result) {
         console.log(result);
     })
 }
