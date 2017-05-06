@@ -41,11 +41,13 @@ function getAppData() {
         name: 'Vivian Home',
         foods: [{
                 name: 'Pan fried egg',
-                recipe: '1 large egg, 1 tsp salt, 5g olive oil'
+                recipe: '1 large egg, 1 tsp salt, 5g olive oil',
+                price: '3.00'
             },
             {
                 name: 'Honey milk',
-                recipe: '0.3 liter milk, 1 tsp honey'
+                recipe: '0.3 liter milk, 1 tsp honey',
+                price: '2.00'
             }
         ]
     }];
