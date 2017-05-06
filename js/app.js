@@ -36,55 +36,39 @@ function queryNutriApi(query) {
     });
 }
 
-function getAppData() {
-    var demoData = [{
-        name: 'Vivian Home',
-        foods: [{
-                name: 'Pan fried egg',
-                recipe: '1 large egg, 1 tsp salt, 5g olive oil',
-                price: 3.00
-            },
-            {
-                name: 'Honey milk',
-                recipe: '0.3 liter milk, 1 tsp honey',
-                price: 2.00
-            }
-        ]
-    }];
-    var getFoodArr = function(demoData,homeName){
-        for(var key in demoData)
-        {
-            if(demoData[key].name === homeName)
-            {
+function getAppData(demoData) {
+    var getFoodArr = function (demoData, homeName) {
+        for (var key in demoData) {
+            if (demoData[key].name === homeName) {
                 var food = demoData[key].foods;
-                return food;//search a restaurant and return its food menu array
+                return food; //search a restaurant and return its food menu array
             }
         };
     }
     var getFoodCalories = function (recipeName) {
         return queryNutriApi(recipeName.recipe).then(function (n) {
             recipeName.nutritions = n;
-            return recipeName;//for each recipe after adding nutrition ,return the recipe Obj
+            return recipeName; //for each recipe after adding nutrition ,return the recipe Obj
         })
     }
-    var getRestaurantFoodCalories = function(homeName){
-        var food = getFoodArr(demoData,homeName);
-        var recipeObj = food.map(function(f){
-        return getFoodCalories(f);
+    var getRestaurantFoodCalories = function (homeName) {
+        var food = getFoodArr(demoData, homeName);
+        var recipeObj = food.map(function (f) {
+            return getFoodCalories(f);
         })
-        return recipeObj;//adding nutritions to all recipes in restaurant
+        return recipeObj; //adding nutritions to all recipes in restaurant
     }
-    
 
- /*   var getResFoodCalories = function (resaurants) {
-        return [].concat.apply([], restaurants.map(function (r) {
-            return r.foods.map(function (f) {
-                return getFoodCalories(f);
-            });
-        }));
-    }*/
 
-   Promise.all(getRestaurantFoodCalories('Vivian Home')).then(function (result) {
+    /*   var getResFoodCalories = function (resaurants) {
+           return [].concat.apply([], restaurants.map(function (r) {
+               return r.foods.map(function (f) {
+                   return getFoodCalories(f);
+               });
+           }));
+       }*/
+
+    Promise.all(getRestaurantFoodCalories('Vivian Home')).then(function (result) {
         console.log(result);
     })
 }
@@ -94,4 +78,8 @@ function getAppData() {
 //     console.log(result);
 //});
 
-getAppData();
+fetch('demo.json').then(function (res) {
+    return res.json();
+}).then(function (data) {
+    getAppData(data);
+})
