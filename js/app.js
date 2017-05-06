@@ -36,67 +36,33 @@ function queryNutriApi(query) {
     });
 }
 
-function getAppData(demoData) {
-    var getFoodArr = function (demoData, homeName) {
-        for (var key in demoData) {
-            if (demoData[key].name === homeName) {
-                var food = demoData[key].foods;
-                return food; //search a restaurant and return its food menu array
-            }
-        };
-    }
-    var getFoodCalories = function (recipeName) {
-        return queryNutriApi(recipeName.recipe).then(function (n) {
-            recipeName.nutritions = n;
-            recipeName.totalCalories = calculateTotalCalories(n);//add total calories property to recipe Object
-            return recipeName; //for each recipe after adding nutrition ,return the recipe Obj
-        })
-    }
-    var getRestaurantFoodCalories = function (homeName) {
-        var food = getFoodArr(demoData, homeName);
-        var recipeObj = food.map(function (f) {
-            return getFoodCalories(f);
-        })
-        return recipeObj; //adding nutritions to all recipes in restaurant
-    }
-
-    var calculateTotalCalories = function (nutritions) {
-        var totalcal = 0;
-        //calculate the total calories of array
-        for (var key in nutritions) 
-        {
-            if (Object.prototype.hasOwnProperty.call(nutritions, key)) 
-            {
-                totalcal += nutritions[key].calories;
-            }
-        }
-        return totalcal;
-    }
-    /*function showcalory(totalcalories){
-        //show calories number in a span or div in HTML page
-        document.getElementById('--caloryspanordivnamehere--').innerHTML=totalcalories.toString();
-    }*/
-
-    /*   var getResFoodCalories = function (resaurants) {
-           return [].concat.apply([], restaurants.map(function (r) {
-               return r.foods.map(function (f) {
-                   return getFoodCalories(f);
-               });
-           }));
-       }*/
-
-    Promise.all(getRestaurantFoodCalories('Vivian Home')).then(function (result) {
-        console.log(result);
-    })
-}
-
-// var q = '1/2 cup vegetable oil, 6 anchovy fillets ,1 small garlic clove , 2 large eggs ,2 tablespoons lemon juice , 3/4 teaspoon Dijon mustard , 2 tablespoon olive oil , 3 tablespoons ground black pepper , 1 pieces bread , 3 tablespoons olive oil , 3 romaine hearts';
-// queryNutriApi(q).then(function (result) {
-//     console.log(result);
-//});
-
-fetch('demo.json').then(function (res) {
+var loadData = (function () {
+    return fetch('demo.json').then(function (res) {
     return res.json();
-}).then(function (data) {
-    getAppData(data);
+    }).then(function (data) {
+    //data is the object dataset of restaurant and foods;
+     for (var key in data) 
+     {
+         //food is all kinds of food in certain restaurant
+        var food = data[key].foods;
+        food.map(function(f){
+            //for each recipe in food ,ask for nutrition and add ingredient calories and total calories in recipe;
+            //return recipe
+            return queryNutriApi(f.recipe).then(function (n) 
+             {
+                f.nutritions = n;
+                f.totalCalories =  Object.keys(n).reduce(function(previous, current){
+                    if(current)
+                    {
+                        previous += n[current].calories;
+                    }
+                    return previous;},0);
+                //?????return f;no return, less time
+                //not sure should return 'f' or not 
+             });
+        }); 
+    };
+    //return data;
+    console.log(data);
 })
+});
