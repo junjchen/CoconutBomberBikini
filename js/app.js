@@ -48,6 +48,7 @@ function getAppData(demoData) {
     var getFoodCalories = function (recipeName) {
         return queryNutriApi(recipeName.recipe).then(function (n) {
             recipeName.nutritions = n;
+            recipeName.totalCalories = calculateTotalCalories(n);//add total calories property to recipe Object
             return recipeName; //for each recipe after adding nutrition ,return the recipe Obj
         })
     }
@@ -59,6 +60,22 @@ function getAppData(demoData) {
         return recipeObj; //adding nutritions to all recipes in restaurant
     }
 
+    var calculateTotalCalories = function (nutritions) {
+        var totalcal = 0;
+        //calculate the total calories of array
+        for (var key in nutritions) 
+        {
+            if (Object.prototype.hasOwnProperty.call(nutritions, key)) 
+            {
+                totalcal += nutritions[key].calories;
+            }
+        }
+        return totalcal;
+    }
+    /*function showcalory(totalcalories){
+        //show calories number in a span or div in HTML page
+        document.getElementById('--caloryspanordivnamehere--').innerHTML=totalcalories.toString();
+    }*/
 
     /*   var getResFoodCalories = function (resaurants) {
            return [].concat.apply([], restaurants.map(function (r) {
