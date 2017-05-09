@@ -1,0 +1,27 @@
+.pull-right {
+    float: right;
+}
+
+.d-card {
+    width: 350px;
+}
+
+.d-card .mdl-card__title {
+    color: #fff;
+    height: 176px;
+}
+
+.d-card .mdl-card__menu {
+    color: #fff;
+}
+
+.d-card__amount {
+    line-height: 32px;
+    padding: 0 5px;
+}
+
+.d-card__info {
+    padding-top: 15px;
+    font-weight: 700;
+    color: #666;
+}
