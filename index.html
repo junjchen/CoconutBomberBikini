@@ -20,7 +20,7 @@
 
     <div class="js-d-list">
     </div>
-
+    <button style="width:300px;" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" onclick="checkout()">Order Now</button>
 </body>
 
 <script>
@@ -53,9 +53,21 @@
         })[0]
         $('.js-d-list').FoodList(h.foods)
     }
+    var checkout = function () {
+        var amount = document.getElementsByClassName("d-card mdl-card mdl-shadow--2dp");
+        var a = [];
+        Object.keys(amount).forEach(function (f) {
+            a.push({ name: amount[f].childNodes[1].innerText, amount: amount[f].childNodes[5].childNodes[5].innerText });
+        });
+        console.log(a);
+        return a;
+    }
+
 </script>
 
 <script id="food-template" type="text/x-custom-template">
+   
+                  
     <div class="d-card mdl-card mdl-shadow--2dp" data-id="{{id}}">
         <div class="mdl-card__title" style="background: url('{{image}}') center / cover">
             <h2 class="mdl-card__title-text">{{name}}</h2>
