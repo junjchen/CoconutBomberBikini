@@ -9,7 +9,7 @@ function queryNutriApi(query) {
             // 'x-app-id': '4b62710c',
             'x-app-id': '07a4c38d',
             // 'x-app-key': '6fa130a6fe641daca440813fa94c98d0'
-            'x-app-key': '27e2dd0670e39d5e59a47a2da754e49b0'
+            'x-app-key': '27e2dd0670e39d5e59a47a2da754e49b'
         }),
         body: JSON.stringify({
             'query': query,
