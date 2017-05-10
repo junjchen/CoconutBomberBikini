@@ -14,25 +14,25 @@ function queryNutriApi(query) {
             'timezone': 'US/Eastern'
         })
     }).
-        then(function (res) {
-            return res.json();
-        }).
-        then(function (data) {
-            return data.foods.reduce(function (previous, current) {
-                var name = current.food_name;
-                if (!previous[name]) {
-                    previous[name] = {
-                        name: name,
-                        weight: current.serving_weight_grams,
-                        calories: current.nf_calories
-                    }
-                } else {
-                    previous[name].weight += current.serving_weight_grams;
-                    previous[name].calories += current.nf_calories;
+    then(function (res) {
+        return res.json();
+    }).
+    then(function (data) {
+        return data.foods.reduce(function (previous, current) {
+            var name = current.food_name;
+            if (!previous[name]) {
+                previous[name] = {
+                    name: name,
+                    weight: current.serving_weight_grams,
+                    calories: current.nf_calories
                 }
-                return previous;
-            }, []);
-        });
+            } else {
+                previous[name].weight += current.serving_weight_grams;
+                previous[name].calories += current.nf_calories;
+            }
+            return previous;
+        }, []);
+    });
 }
 
 var loadData = function () {
@@ -61,6 +61,43 @@ var loadData = function () {
             });
             promises.push(Promise.all(newFood));
         };
-        return promises;
-    }).then(function () { return retval; })
+        return Promise.all(promises);
+    }).then(function () {
+        return retval;
+    })
 };
+
+$.fn.FoodList = function (foods) {
+    this.empty()
+    var source = $('#food-template').html()
+    var template = Handlebars.compile(source)
+    var that = this
+    foods.forEach(function (f) {
+        var context = {
+            id: f.id,
+            name: f.name,
+            description: f.recipe,
+            image: f.image,
+            calories: f.totalCalories.toFixed(2),
+            price: f.price.toFixed(2),
+        }
+        var html = template(context)
+        that.append(html)
+    })
+}
+
+$.fn.HomeList = function (homes) {
+    this.empty()
+    var source = $('#home-template').html()
+    var template = Handlebars.compile(source)
+    var that = this
+    homes.forEach(function (h) {
+        var context = {
+            id: h.id,
+            name: h.name,
+            image: h.image
+        }
+        var html = template(context)
+        that.append(html)
+    })
+}
