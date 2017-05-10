@@ -1,0 +1,107 @@
+.d-nav {
+    background-color: #fff;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.d-nav__logo {
+    height: 50px;
+}
+
+.d-map {
+    height: calc(100vh - 64px);
+}
+
+.d-sidebar {
+    width: 750px;
+    padding: 0 !important;
+}
+
+.d-sidebar__header {
+    /*background-color:#689F38;*/
+    background-color: rgb(63, 81, 181);
+    height: 80px;
+    margin-bottom: 15px;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+}
+
+.d-sidebar__header .d-rating-star {
+    line-height: 40px;
+}
+
+.d-sidebar__header h3 {
+    margin: 0;
+    color: #fff;
+    flex-grow: 1;
+}
+
+.d-sidebar__container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0 20px;
+}
+
+.d-card {
+    width: 350px;
+    margin-bottom: 24px;
+}
+
+.d-card--image .mdl-card__actions {
+    height: 52px;
+    padding: 16px;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.d-card .mdl-card__title {
+    color: #fff;
+    height: 176px;
+}
+
+.d-card .mdl-card__menu {
+    color: #fff;
+}
+
+.d-card__amount {
+    line-height: 32px;
+    padding: 0 5px;
+}
+
+.d-card__info {
+    padding-top: 15px;
+    font-weight: 700;
+    color: #666;
+}
+
+.d-rating-star {
+    color: #FFCA28;
+}
+
+.pull-right {
+    float: right;
+}
+
+
+/*rewrite*/
+
+.leaflet-sidebar {
+    width: 394px !important;
+}
+
+.leaflet-sidebar.left.visible ~ .leaflet-left {
+    left: 394px !important;
+}
+
+.leaflet-sidebar--wide {
+    width: 789px !important;
+}
+
+.leaflet-sidebar--wide.left.visible ~ .leaflet-left {
+    left: 789px !important;
+}
