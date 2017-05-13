@@ -88,6 +88,10 @@
     margin-bottom: 24px;
 }
 
+.d-card--image {
+    cursor: pointer;
+}
+
 .d-card--image .mdl-card__actions {
     height: 52px;
     padding: 16px;
@@ -121,7 +125,7 @@
 
 .d-dialog {
     width: 1000px;
-    height: 500px;
+    height: 515px;
     z-index: 999;
 }
 
@@ -146,6 +150,15 @@
 .d-donut-legend-chart {
     display: flex;
     justify-content: center;
+}
+
+.d-donut-caption {
+    text-align: center;
+}
+
+.d-chart-text {
+    padding: 0 24px;
+    color: rgba(0, 0, 0, .54);
 }
 
 .pull-right {
