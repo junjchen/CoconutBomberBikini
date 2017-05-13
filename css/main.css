@@ -63,7 +63,8 @@
 }
 
 .d-sidebar__home-header h6 {
-    margin: 0 0 0 6px;
+    margin: 0 0 0 8px;
+    text-transform: uppercase;
 }
 
 .d-sidebar__btn {
