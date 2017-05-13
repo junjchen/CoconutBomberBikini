@@ -1,4 +1,5 @@
 .d-nav {
+    position: relative;
     background-color: #fff;
     flex-direction: row;
     justify-content: center;
@@ -6,7 +7,20 @@
 }
 
 .d-nav__logo {
-    height: 50px;
+    height: 56px;
+}
+
+.d-nav__link {
+    position: absolute;
+    right: 35px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.d-nav__link button {
+    margin-right: 20px;
 }
 
 .d-map {
@@ -18,7 +32,7 @@
     padding: 0 !important;
 }
 
-.d-sidebar__header {
+.d-sidebar__foods-header {
     /*background-color:#689F38;*/
     background-color: rgb(63, 81, 181);
     height: 80px;
@@ -26,17 +40,38 @@
     padding: 0 20px;
     display: flex;
     flex-direction: row;
-    align-items: flex-end;
+    align-items: center;
 }
 
-.d-sidebar__header .d-rating-star {
+.d-sidebar__foods-header .d-rating-star {
     line-height: 40px;
 }
 
-.d-sidebar__header h3 {
-    margin: 0;
+.d-sidebar__foods-header h3 {
+    margin: 0 10px 0 0;
     color: #fff;
+}
+
+.d-sidebar__home-header {
+    padding: 14px 20px;
+    color: #666;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-bottom: 2px solid rgb(63, 81, 181);
+    margin-bottom: 16px;
+}
+
+.d-sidebar__home-header h6 {
+    margin: 0 0 0 6px;
+}
+
+.d-sidebar__btn {
     flex-grow: 1;
+}
+
+.d-sidebar__btn button {
+    color: #fff;
 }
 
 .d-sidebar__container {
@@ -83,6 +118,35 @@
     color: #FFCA28;
 }
 
+.d-dialog {
+    width: 1000px;
+    height: 500px;
+    z-index: 999;
+}
+
+.d-dialog__subtitle {
+    padding: 0 24px;
+}
+
+.d-dialog__content {
+    display: flex;
+    flex-direction: row;
+}
+
+.d-chart {
+    width: 450px;
+}
+
+.d-chart-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.d-donut-legend-chart {
+    display: flex;
+    justify-content: center;
+}
+
 .pull-right {
     float: right;
 }
@@ -94,7 +158,7 @@
     width: 394px !important;
 }
 
-.leaflet-sidebar.left.visible ~ .leaflet-left {
+.leaflet-sidebar.left.visible~.leaflet-left {
     left: 394px !important;
 }
 
@@ -102,6 +166,6 @@
     width: 789px !important;
 }
 
-.leaflet-sidebar--wide.left.visible ~ .leaflet-left {
+.leaflet-sidebar--wide.left.visible~.leaflet-left {
     left: 789px !important;
 }

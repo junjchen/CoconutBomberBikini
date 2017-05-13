@@ -21,14 +21,14 @@
             {
                 "id": "1.3",
                 "name": "Double cooked pork",
-                "recipe": "1.5kg pork, 1 red bell peper, 1 green bell peper, spring onion, sugar, salt, garlic, ginger",
+                "recipe": "300g pork, 1 red bell peper, 1 green bell peper, spring onion, sugar, salt, garlic, ginger",
                 "image": "http://ali.xinshipu.cn/20150114/original/1421182782922.jpg",
                 "price": 4.50
             },
             {
                 "id": "1.4",
                 "name": "Salmon salad",
-                "recipe": "450g salmon, 2 eggs, 1 green bell peper, 1 cucmber, half onion, 4 tsp mayonnaise, salt, peper, half lemon",
+                "recipe": "200g salmon, 2 eggs, 1 green bell peper, 1 cucmber, half onion, 4 tsp mayonnaise, salt, peper, half lemon",
                 "image": "http://www.wholefoodsmarket.com/sites/default/files/styles/header_recipe/public/media/3474-1.jpg",
                 "price": 3.00
             },
