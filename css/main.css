@@ -32,7 +32,7 @@
     padding: 0 !important;
 }
 
-.d-sidebar__header {
+.d-sidebar__foods-header {
     /*background-color:#689F38;*/
     background-color: rgb(63, 81, 181);
     height: 80px;
@@ -43,14 +43,35 @@
     align-items: center;
 }
 
-.d-sidebar__header .d-rating-star {
+.d-sidebar__foods-header .d-rating-star {
     line-height: 40px;
 }
 
-.d-sidebar__header h3 {
-    margin: 0;
+.d-sidebar__foods-header h3 {
+    margin: 0 10px 0 0;
     color: #fff;
+}
+
+.d-sidebar__home-header {
+    padding: 14px 20px;
+    color: #666;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-bottom: 2px solid rgb(63, 81, 181);
+    margin-bottom: 16px;
+}
+
+.d-sidebar__home-header h6 {
+    margin: 0 0 0 6px;
+}
+
+.d-sidebar__btn {
     flex-grow: 1;
+}
+
+.d-sidebar__btn button {
+    color: #fff;
 }
 
 .d-sidebar__container {
@@ -95,6 +116,35 @@
 
 .d-rating-star {
     color: #FFCA28;
+}
+
+.d-dialog {
+    width: 1000px;
+    height: 500px;
+    z-index: 999;
+}
+
+.d-dialog__subtitle {
+    padding: 0 24px;
+}
+
+.d-dialog__content {
+    display: flex;
+    flex-direction: row;
+}
+
+.d-chart {
+    width: 450px;
+}
+
+.d-chart-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.d-donut-legend-chart {
+    display: flex;
+    justify-content: center;
 }
 
 .pull-right {

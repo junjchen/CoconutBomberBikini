@@ -24,16 +24,25 @@ function queryNutriApi(query) {
             var name = current.food_name;
             if (!previous[name]) {
                 previous[name] = {
-                    name: name,
                     weight: current.serving_weight_grams,
-                    calories: current.nf_calories
+                    calories: current.nf_calories,
+                    cholesterol: current.nf_cholesterol,
+                    sodium: current.nf_sodium,
+                    fat: current.nf_total_fat,
+                    protein: current.nf_protein,
+                    carbonhydrates: current.nf_total_carbohydrate,
                 }
             } else {
-                previous[name].weight += current.serving_weight_grams;
-                previous[name].calories += current.nf_calories;
+                previous[name].weight += current.serving_weight_grams
+                previous[name].calories += current.nf_calories
+                previous[name].cholesterol += current.nf_cholesterol
+                previous[name].sodium += current.nf_sodium
+                previous[name].fat += current.nf_total_fat
+                previous[name].protein += current.nf_protein
+                previous[name].carbonhydrates += current.nf_total_carbohydrate
             }
             return previous;
-        }, []);
+        }, {});
     });
 }
 
@@ -52,19 +61,29 @@ var loadData = function () {
                 //for each recipe in food ,ask for nutrition and add ingredient calories and total calories in recipe;
                 //return recipe
                 return queryNutriApi(f.recipe).then(function (n) {
-                    f.nutritions = n;
-                    f.totalCalories = Object.keys(n).reduce(function (previous, current) {
-                        if (current) {
-                            previous += n[current].calories;
+                    var sum = function (name) {
+                        var objs = Object.values(n)
+                        var add = function (a, b) {
+                            return a + b
                         }
-                        return previous;
-                    }, 0);
+                        return objs.map(function (d) {
+                            return d[name]
+                        }).reduce(add, 0)
+                    }
+                    f.calories = sum('calories')
+                    f.cholesterol = sum('cholesterol')
+                    f.sodium = sum('sodium')
+                    f.fat = sum('fat')
+                    f.protein = sum('protein')
+                    f.carbonhydrates = sum('carbonhydrates')
                 });
             });
             promises.push(Promise.all(newFood));
         };
         return Promise.all(promises);
     }).then(function () {
+        return retval;
+    }).catch(function () {
         return retval;
     })
 };
@@ -73,33 +92,285 @@ $.fn.FoodList = function (foods) {
     this.empty()
     var source = $('#food-template').html()
     var template = Handlebars.compile(source)
-    var that = this
-    foods.forEach(function (f) {
+    var ret = foods.map(function (f) {
         var context = {
             id: f.id,
             name: f.name,
             description: f.recipe,
             image: f.image,
-            calories: f.totalCalories.toFixed(2),
+            calories: f.calories && f.calories.toFixed(2),
             price: f.price.toFixed(2),
         }
-        var html = template(context)
-        that.append(html)
+        var $el = $(template(context))
+        var clickEvts = Bacon.fromEvent($el, 'click')
+        var iconClickEvts = clickEvts.filter(function (e) {
+            return e.target.className === "material-icons"
+        })
+        var ups = iconClickEvts.filter(function (e) {
+            return e.target.innerText === 'add'
+        }).map(1)
+        var downs = iconClickEvts.filter(function (e) {
+            return e.target.innerText === 'remove'
+        }).map(-1)
+        var popupEvts = clickEvts.filter(function (e) {
+            return e.target.className.indexOf('js-d-card__btn-detai') !== -1
+        }).map(function () {
+            return f
+        })
+        ups.merge(downs).scan(0, function (x, y) {
+            var r = x + y
+            return r < 0 ? 0 : r
+        }).assign($el.find('.d-card__amount'), 'text')
+        return {
+            el: $el,
+            counterEvts: ups.merge(downs),
+            popupEvts: popupEvts
+        }
     })
+    this.append(ret.map(function (n) {
+        return n.el
+    }))
+    return ret
 }
 
 $.fn.HomeList = function (homes) {
     this.empty()
     var source = $('#home-template').html()
     var template = Handlebars.compile(source)
-    var that = this
-    homes.forEach(function (h) {
+    var ret = homes.map(function (h) {
         var context = {
             id: h.id,
             name: h.name,
             image: h.image
         }
-        var html = template(context)
-        that.append(html)
+        var $el = $(template(context))
+        var clickEvts = Bacon.fromEvent($el, 'click').map(function () {
+            return h.id
+        })
+        return {
+            el: $el,
+            clickEvts: clickEvts
+        }
     })
+    this.append(ret.map(function (n) {
+        return n.el
+    }))
+    return ret
 }
+
+function renderMarkersOnMap(d, map, evtStreams) {
+    var clickEvtStreams = d.map(function (r) {
+        var m = L.marker([r.lat, r.lon], {
+            icon: L.icon({
+                iconUrl: 'images/ic_person_pin_circle_black_24px.svg',
+                iconSize: [35, 35],
+                className: 'd-map__icon'
+            })
+        }).addTo(map)
+        return Bacon.fromEvent(m, 'click').map(function () {
+            return r.id
+        })
+    })
+    evtStreams.markerClick = Bacon.mergeAll(clickEvtStreams)
+}
+
+function renderSidebar(d, id) {
+    var $sidebar = $('.leaflet-sidebar')
+    var $sidebarContainer = $('.d-sidebar__container')
+    var $sidebarHeader = $('.d-sidebar__header')
+
+    $sidebarContainer.empty();
+    $sidebarHeader.empty();
+
+
+    if (id) {
+        var h = d.filter(function (x) {
+            return x.id == id
+        })[0]
+        if (!$sidebar.hasClass('leaflet-sidebar--wide')) {
+            $sidebar.addClass('leaflet-sidebar--wide')
+        }
+        var ret = $sidebarContainer.FoodList(h.foods)
+        var headerHtml = Handlebars.compile($('#food-list-header-template').html())({
+            name: h.name
+        })
+        $sidebarHeader.append(headerHtml)
+
+        var orderCounter = Bacon.mergeAll(ret.map(function (d) {
+            return d.counterEvts
+        })).scan(0, function (x, y) {
+            var r = x + y
+            return r < 0 ? 0 : r
+        })
+        orderCounter.assign($sidebarHeader.find('.js-d-sidebar__counter'), 'text')
+        orderCounter.onValue(function (v) {
+            if (v === 0) {
+                $sidebarHeader.find('.js-d-sidebar__btn').prop('disabled', true)
+            } else {
+                $sidebarHeader.find('.js-d-sidebar__btn').prop('disabled', false)
+            }
+        })
+
+        var popupOpener = Bacon.mergeAll(ret.map(function (d) {
+            return d.popupEvts
+        })).onValue(function (data) {
+            document.querySelector('dialog').showModal()
+            createBarChart(data)
+        })
+
+
+    } else {
+        if ($sidebar.hasClass('leaflet-sidebar--wide')) {
+            $sidebar.removeClass('leaflet-sidebar--wide')
+        }
+        var ret = $sidebarContainer.HomeList(d)
+        var headerHtml = Handlebars.compile($('#home-list-header-template').html())({
+            count: d.length
+        })
+        $sidebarHeader.append(headerHtml)
+        Bacon.mergeAll(ret.map(function (d) {
+            return d.clickEvts
+        })).onValue(function (id) {
+            renderSidebar(d, id)
+        })
+    }
+}
+
+function createBarChart(data) {
+    $('.js-d-bar-chart').empty()
+    $('.js-d-donut-chart').empty()
+    var RI = {
+        calories: 2000,
+        fat: 70,
+        carbonhydrates: 260,
+        protein: 50,
+        sodium: 2400,
+        cholesterol: 300
+    }
+    var barChart = britecharts.bar(),
+        dataset = [{
+                "name": "Calories",
+                "value": data.calories / RI.calories
+            },
+            {
+                "name": "Fat",
+                "value": data.fat / RI.fat
+            },
+            {
+                "name": "Protein",
+                "value": data.protein / RI.protein
+            },
+            {
+                "name": "Sodium",
+                "value": data.sodium / RI.sodium
+            },
+            {
+                "name": "Carbonhydrates",
+                "value": data.carbonhydrates / RI.carbonhydrates
+            },
+            {
+                "name": "Cholesterol",
+                "value": data.cholesterol / RI.cholesterol
+            }
+        ],
+        barContainer = d3.select('.js-d-bar-chart'),
+        barChartContainerWidth = barContainer.node().getBoundingClientRect().width
+
+    barChart
+        .margin({
+            left: 120,
+            right: 20,
+            top: 20,
+            bottom: 5
+        })
+        .percentageAxisToMaxRatio(1.3)
+        .horizontal(true)
+        .colorSchema(britecharts.colors.colorSchemas.britechartsColorSchema)
+        .width(barChartContainerWidth)
+        .height(300)
+        .usePercentage(true)
+        .enablePercentageLabels(true)
+        .percentageAxisToMaxRatio(1.2)
+
+    barContainer.datum(dataset).call(barChart);
+
+    var donutChart = britecharts.donut(),
+        donutContainer = d3.select('.js-d-donut-chart'),
+        donutContainerWidth = donutContainer.node().getBoundingClientRect().width
+
+    donutChart
+        .width(donutContainerWidth)
+        .height(donutContainerWidth / 1.8)
+        .externalRadius(donutContainerWidth / 4)
+        .internalRadius(donutContainerWidth / 8)
+
+    var totalFat = data.protein * 4 + data.carbonhydrates * 4 + data.fat * 9
+    var donutDataset = [{
+            "name": "Protein",
+            "id": 1,
+            "quantity": data.protein * 4,
+            "percentage": (100 * data.protein * 4 / totalFat).toFixed(2)
+        },
+        {
+            "name": "Fat",
+            "id": 2,
+            "quantity": data.fat * 4,
+            "percentage": (100 * data.fat * 4 / totalFat).toFixed(2)
+        },
+        {
+            "name": "Carbonhydrates",
+            "id": 3,
+            "quantity": data.carbonhydrates * 4,
+            "percentage": (100 * data.carbonhydrates * 4 / totalFat).toFixed(2)
+        }
+    ]
+    donutContainer.datum(donutDataset).call(donutChart);
+
+    var legendChart = britecharts.legend(),
+        legendContainer = d3.select('.js-d-donut-legend-chart'),
+        legendContainerWidth = legendContainer.node().getBoundingClientRect().width
+    d3.select('.js-d-donut-legend-chart .britechart-legend').remove()
+
+    legendChart
+        .horizontal(true)
+        .width(legendContainerWidth * 0.6)
+        .markerSize(8)
+        .height(40)
+    legendContainer.datum(donutDataset).call(legendChart);
+}
+
+$(function () {
+    var evtStreams = {}
+    var map = L.map('js-d-map').setView([50.907571, -1.405120], 15);
+    L.gridLayer.googleMutant({
+        type: 'roadmap'
+    }).addTo(map)
+
+    var sidebar = L.control.sidebar('js-d-sidebar', {
+        closeButton: false,
+        position: 'left'
+    })
+    map.addControl(sidebar);
+    evtStreams.mapClick = Bacon.fromEvent(map, 'click')
+
+    setTimeout(function () {
+        sidebar.show()
+    }, 1000)
+
+    loadData()
+        .then(function (d) {
+            renderMarkersOnMap(d, map, evtStreams)
+            renderSidebar(d)
+            evtStreams.markerClick.onValue(function (id) {
+                renderSidebar(d, id)
+            })
+            evtStreams.mapClick.throttle(300).onValue(function () {
+                renderSidebar(d)
+            })
+        })
+
+    Bacon.fromEvent($('.js-d-dialog__close-btn'), 'click').onValue(function () {
+        document.querySelector('dialog').close();
+    })
+
+})
