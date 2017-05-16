@@ -6,10 +6,10 @@
         "image": "https://www.splendidtable.org/sites/default/files/styles/lede_image/public/cooking.jpg",
         "foods": [{
                 "id": "1.1",
-                "name": "Pan fried egg",
+                "name": "Eggs Benedict",
                 "recipe": "1 large egg, 1 tsp salt, 5g olive oil",
-                "image": "https://cdn.shutterstock.com/shutterstock/videos/13801319/thumb/8.jpg",
-                "price": 3.00
+                "image": "https://images-gmi-pmc.edge-generalmills.com/5b0a5aa3-c5be-4274-a153-5632e5b94243.jpg",
+                "price": 5.00
             },
             {
                 "id": "1.2",
