@@ -1,0 +1,71 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <link rel="stylesheet" href="css/order.css">
+    <script defer src="js/order.js"></script>
+</head>
+
+<body onload="changeprogressbar_done()">
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <header class="mdl-layout__header" style="background-color: white">
+            <div class="menubar mdl-layout__header-row">
+                <img src="image/logo.png" alt="" style="height: inherit; margin: auto" />
+            </div>
+        </header>
+
+
+        <main class="mdl-layout__content">
+            <div class="page-content">
+                <div class="topbar">
+                    <ul class="demo-list-icon mdl-list" id="steptopbar">
+                        <li class="mdl-list__item" id="steptopbar_step">
+                            <span class="mdl-list__item-primary-content">
+                                <i class="material-icons mdl-list__item-icon"></i>
+                                <a href="#" class="linkdisabled">Order</a> 
+                                  <i class="material-icons indigo"id="done">check_circle</i>
+                        </span>
+                        </li>
+                        <li class="mdl-list__item" id="steptopbar_step">
+                            <span class="mdl-list__item-primary-content">
+                            <i class="material-icons mdl-list__item-icon"></i>
+                            <a href="#" class="linkdisabled">Payment</a>
+                           <i class="material-icons indigo"id="done">check_circle</i> </span>
+                        </li>
+                        <li class="mdl-list__item" id="steptopbar_step">
+                            <span class="mdl-list__item-primary-content">
+                                <i class="material-icons mdl-list__item-icon"></i>
+                                <a href="#" class="linkdisabled">Delivery</a>
+                                 <i class="material-icons md-inactive" id="done">check_circle</i>
+                            </span>
+                        </li>
+                        <li class="mdl-list__item" id="steptopbar_step">
+                            <span class="mdl-list__item-primary-content">
+                                <i class="material-icons mdl-list__item-icon"></i>
+                                <a href="#" class="linkdisabled">Review</a>
+                                <i class="material-icons md-inactive" id="done">check_circle</i>
+                            </span>
+                        </li>
+                    </ul>
+                    <div id="processbar" class="mdl-progress mdl-js-progress"> </div>
+                </div>
+                 <div class="mdl-grid" id = "thankscardcontainer">
+                    <div class="thankscard mdl-card mdl-shadow--2dp">
+                    <div class="mdl-card__title">
+                        <h2 class="mdl-card__title-text">Thank you for reviewing!</h2>
+                    </div>
+                    <div class="mdl-card__supporting-text">
+                      Your review will be used to improve our website and our restaurants.
+                    </div>
+                    <div class="mdl-card__actions mdl-card--border">
+                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="window.location.href='app.html'">
+     Go Back to home
+    </a>
+                    </div>
+                    </div>
+                </div>
+        </main>
+        </div>
+</body>

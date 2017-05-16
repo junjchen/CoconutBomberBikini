@@ -1,159 +1,153 @@
-<!DOCTYPE html>
-
 <html>
 
 <head>
-    <!--jQuery-->
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-        crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.lime-indigo.min.css" />
+	<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!--<link rel="stylesheet" type="text/css" href="styles.css">-->
+</head>
 
-    <!--mdl-->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
-    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+<!--<body>
+		
+	
+	<div class="container">
+  <img class="backimg" src="salad.jpg" alt="Salad" width="1000" height="300"> 
+  <p>Hola</p>
+  <div class="logoClass"> <img src="logo1.png" alt="Domus" > </div>
+</div>
 
-    <!--leaflet-->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" integrity="sha512-07I2e+7D8p6he1SIM+1twR5TIrhUQn9+I6yjqD53JQjFiMf8EtC93ty0/5vJTZGF8aAocvHYNEDJajGdNx1IsQ=="
-        crossorigin="" />
-    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js" integrity="sha512-A7vV8IFfih/D732iSSKi20u/ooOfj/AGehOKq0f4vLT1Zr2Y+RX7C+w8A1gaSasGtRUZpF/NZgzSAu4/Gc41Lg=="
-        crossorigin=""></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7FEOImyvs44PDvoSDxrh2gDjd2HD8sek" async defer></script>
-    <script src='https://unpkg.com/leaflet.gridlayer.googlemutant@latest/Leaflet.GoogleMutant.js'></script>
+	</body>-->
 
-    <!--leaflet-sidebar-->
-    <link rel="stylesheet" href="css/L.Control.Sidebar.css" />
-    <script src="js/L.Control.Sidebar.js"></script>
 
-    <!--handlebars-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.8/handlebars.min.js"></script>
 
-    <!--bacon-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bacon.js/0.7.93/Bacon.min.js"></script>
+<style>
+	.container {
+		position: relative;
+		top: 6%;
+	}
 
-    <!--britecharts-->
-    <link rel="stylesheet" href="css/britecharts.min.css">
-    <script src="js/bar.min.js"></script>
-    <script src="js/donut.min.js"></script>
-    <script src="js/colors.min.js"></script>
-    <script src="js/legend.min.js"></script>
+	.center {
+		position: absolute;
+		left: 0;
+		top: 25%;
+		width: 100%;
+		text-align: center;
+		font-size: 18px;
+	}
 
-    <!--d3-selection-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-selection/1.0.6/d3-selection.min.js"></script>
+	.imgBack {
+		width: 100%;
+		height: 630;
+		opacity: 0.5;
+	}
 
-    <!--custom-->
-    <link rel="stylesheet" href="css/main.css">
-    <script src="./js/app.js"></script>
+	.formPost {
+		position: absolute;
+		left: 35%;
+		top: 55%;
+		width: 30%;
+		min-width: 450px;
+		text-align: center;
+		font-size: 18px;
+		background-color: white;
+		border-style: solid;
+		border-color: black;
+		border-width: 2px;
+	}
 
+	.logoClass {
+		position: absolute;
+		left: 23%;
+		height: 200px;
+	}
+
+	.homeChefAsk {
+		position: absolute;
+		left: 35%;
+		top: 70%;
+		width: 30%;
+		text-align: center;
+		font-size: 18px;
+		min-width: 300px;
+	}
+
+	.searchButton {
+		margin-left: 30px;
+		background-color: #CDDC39;
+	}
+
+	.searchButton:hover {
+		background-color: #F0F4C3;
+	}
+
+	.menuheader {
+
+		position: relative;
+		float: right;
+		top: 20px;
+	}
+
+	.headerButton {
+		background-color: transparent;
+		font-size: 24px;
+	}
+
+	a:link,
+	a:visited {
+		background-color: #f44336;
+		color: white;
+		padding: 5px 7px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		border-radius: 10px;
+		font-size: 16;
+	}
+
+
+	a:hover,
+	a:active {
+
+		background-color: red;
+	}
+</style>
 </head>
 
 <body>
-    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header d-app">
-        <!--nav-->
-        <header class="mdl-layout__header d-nav">
-            <img class="d-nav__logo" src="images/logo.png" />
-            <div class="d-nav__link">
-                <button class="mdl-button mdl-js-button mdl-button--colored">
-                    I'm a chef
-                </button>
-                <i class="material-icons mdl-list__item-avatar">person</i>
-            </div>
-        </header>
-        <main class="mdl-layout__content">
-            <!--dialog-->
-            <dialog class="mdl-dialog d-dialog">
-                <h4 class="mdl-dialog__title">Nutrition facts</h4>
-                <label class="d-dialog__subtitle">Based on adult's reference intakes (RI)</label>
-                <div class="mdl-dialog__content d-dialog__content">
-                    <div class="d-chart js-d-bar-chart">
-                    </div>
-                    <div class="d-chart d-chart-wrapper">
-                        <div class="d-donut-caption">Source of calories</div>
-                        <div class="js-d-donut-chart"></div>
-                        <div class="js-d-donut-legend-chart d-donut-legend-chart"></div>
-                    </div>
-                </div>
-                <div class="d-chart-text">
-                    * RI Data from <a href="http://www.nhs.uk/Livewell/Goodfood/Pages/reference-intakes-RI-guideline-daily-amounts-GDA.aspx">NHS's</a> recommended grams of nutrients per day for healthy weight loss
-                </div>
-                <div class="mdl-dialog__actions">
-                    <button type="button" class="mdl-button js-d-dialog__close-btn">close</button>
-                </div>
-            </dialog>
-            <!--map-->
-            <div id="js-d-map" class="d-map"></div>
-            <!--sidebar-->
-            <div id="js-d-sidebar" class="d-sidebar">
-                <div class="d-sidebar__header">
-                </div>
-                <div class="d-sidebar__container">
-                </div>
-            </div>
-        </main>
+	<div class="menuheader">
+		<!-- Flat button with ripple -->
+		<button class="headerButton mdl-button mdl-js-button mdl-js-ripple-effect">
+  Log In
+</button>
 
-    </div>
+		<button class="headerButton mdl-button mdl-js-button mdl-js-ripple-effect">
+Register</button>
 
-    <script id="home-list-header-template" type="text/x-custom-template">
-        <div class="d-sidebar__home-header">
-            <i class="material-icons mdl-list__item-icon">info_outline</i>
-            <h6>We found {{count}} chefs!</h6>
-        </div>
-    </script>
-    <script id="food-list-header-template" type="text/x-custom-template">
-        <div class="d-sidebar__foods-header">
-            <h3>{{name}}</h3>
-            <i class="material-icons d-rating-star">star</i>
-            <i class="material-icons d-rating-star">star</i>
-            <i class="material-icons d-rating-star">star</i>
-            <i class="material-icons d-rating-star">star</i>
-            <i class="material-icons d-rating-star">star</i>
-            <div class="d-sidebar__btn">
-                <button class="mdl-button mdl-js-button js-d-sidebar__btn pull-right" disabled>
-                <span>Place the order (<span>
-                <span class="js-d-sidebar__counter">0</span>
-                <span>)<span>
-            </button>
-            </div>
-        </div>
-    </script>
-    <script id="home-template" type="text/x-custom-template">
-        <div class="d-card d-card--image mdl-card mdl-shadow--2dp" style="background: url('{{image}}') center / cover">
-            <div class="mdl-card__title mdl-card--expand"></div>
-            <div class="mdl-card__actions">
-                <span class="demo-card-image__filename">{{name}}</span>
-            </div>
-        </div>
-    </script>
-    <script id="food-template" type="text/x-custom-template">
-        <div class="d-card mdl-card mdl-shadow--2dp" data-id="{{id}}">
-            <div class="mdl-card__title" style="background: url('{{image}}') center / cover">
-                <h2 class="mdl-card__title-text">{{name}}</h2>
-            </div>
-            <div class="mdl-card__supporting-text">
-                {{description}}
-                <div class="d-card__info">
-                    <span>{{calories}} kcal</span>
-                    <span class="pull-right">${{price}}</span>
-                </div>
-            </div>
-            <div class="mdl-card__actions mdl-card--border">
-                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect js-d-card__btn-detail">
-                VIEW DETAILS
-            </a>
-                <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored pull-right js-d-card__btn-remove">
-                <i class="material-icons">remove</i>
-            </button>
-                <span class="d-card__amount pull-right">0</span>
-                <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored pull-right js-d-card__btn-add">
-                <i class="material-icons">add</i>
-            </button>
-            </div>
-            <div class="mdl-card__menu">
-                <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-                <i class="material-icons">share</i>
-            </button>
-            </div>
-        </div>
-    </script>
-</body>
+	</div>
+
+	<div class="container">
+		<img class="imgBack" src="images/salad2.png" alt="Norway" width="1000" height="300">
+		<div class="center">
+			<div> <img class="logoClass" src="images/logo2.png" alt="Smiley face"> </div>
+		</div>
+
+
+		<!-- Simple Textfield -->
+		<div class="formPost">
+			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+				<input class="mdl-textfield__input" type="text" id="sample3" value="SO140GE">
+				<label class="mdl-textfield__label" for="sample3">Introduce your Postcode...</label>
+			</div>
+			<button class="searchButton mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" onclick="window.location.href='app.html'">
+  Search
+</button>
+		</div>
+
+		<h5 class="homeChefAsk">Are you a Home Chef? <a href="upload_meal.html"> Click here</a></h5>
+
+	</div>
+
 
 </html>

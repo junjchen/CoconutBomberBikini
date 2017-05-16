@@ -1,0 +1,117 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <link rel="stylesheet" href="css/stepper.min.css">
+    <!-- Stepper Javascript minified -->
+    <script defer src="js/stepper.min.js"></script>
+    <link rel="stylesheet" href="css/order.css">
+    <script defer src="js/order.js"></script>
+
+</head>
+
+<body onload="changeprogressbar_deliver();changeDelivery()">
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <header class="mdl-layout__header" style="background-color: white">
+            <div class="menubar mdl-layout__header-row">
+                <img src="image/logo.png" alt="" style="height: inherit; margin: auto" />
+            </div>
+        </header>
+
+        <main class="mdl-layout__content">
+            <div class="page-content">
+                <div class="topbar">
+                    <ul class="demo-list-icon mdl-list" id="steptopbar">
+                        <li class="mdl-list__item" id="steptopbar_step">
+                            <span class="mdl-list__item-primary-content">
+                                <i class="material-icons mdl-list__item-icon"></i>
+                                <a href="#" class="linkdisabled">Order</a> 
+                                  <i class="material-icons indigo"id="done">check_circle</i>
+                        </span>
+                        </li>
+                        <li class="mdl-list__item" id="steptopbar_step">
+                            <span class="mdl-list__item-primary-content">
+                            <i class="material-icons mdl-list__item-icon"></i>
+                            <a href="#" class="linkdisabled">Payment</a>
+                           <i class="material-icons indigo"id="done">check_circle</i> </span>
+                        </li>
+                        <li class="mdl-list__item" id="steptopbar_step">
+                            <span class="mdl-list__item-primary-content">
+                                <i class="material-icons mdl-list__item-icon"></i>
+                                <a href="#" class="linkdisabled">Delivery</a>
+                                 <i class="material-icons md-inactive">check_circle</i>
+                            </span>
+                        </li>
+                        <li class="mdl-list__item" id="steptopbar_step">
+                            <span class="mdl-list__item-primary-content">
+                                <i class="material-icons mdl-list__item-icon"></i>
+                                <a href="#" class="linkdisabled">Review</a>
+                                <i class="material-icons md-inactive"id="notdo">check_circle</i>
+                            </span>
+                        </li>
+                    </ul>
+                    <div id="processbar" class="mdl-progress mdl-js-progress"> </div>
+                </div>
+                <div class="mdl-grid" style="width:80%">
+                    <div class="deliveryprocesscard">
+                        <ul class="mdl-stepper mdl-stepper--linear" id="deliveryprocess">
+                            <li class="mdl-step" id="step1">
+                                <span class="mdl-step__label" style = "background-color:transparent">
+                                    <span class="mdl-step__title">
+                                    <span class="mdl-step__title-text">Pay Successfully!</span>
+                                </span>
+                                </span>
+                                <div class="mdl-step__content">Your payment was successful! <br/> Vivian has already received your order </div>
+                                <div class="mdl-step__actions">
+
+                                </div>
+                            </li>
+                            <li class="mdl-step" id="step2">
+                                 <span class="mdl-step__label" style = "background-color:transparent" >
+                                     <span class="mdl-step__title">
+                                         <span class="mdl-step__title-text">Preparing Foods</span>
+                                </span>
+                                </span>
+                                <div class="mdl-step__content"> Our chef is making your food now!</div>
+                                <div class="mdl-step__actions">
+                                </div>
+                            </li>
+                            <li class="mdl-step" id="step3">
+                                 <span class="mdl-step__label" style = "background-color:transparent">
+          <span class="mdl-step__title">
+            <span class="mdl-step__title-text">Out of Delivery</span>
+                                </span>
+                                </span>
+                                <div class="mdl-step__content">Your food is done! Hang on! Your food is arriving.</div>
+                                <div class="mdl-step__actions">
+                                </div>
+                            </li>
+                            <li class="mdl-step mdl-step__completed" id="step4">
+                                 <span class="mdl-step__label" style = "background-color:transparent">
+                                     <span class="mdl-step__title">
+                                        <span class="mdl-step__title-text">Done</span>
+                                </span>
+                                </span>
+                                <!-- <div class="mdl-step__content"></div>-->
+                                <div class="mdl-step__actions">
+                                    <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored mdl-button--raised" onclick="location.href='Review.html'">
+            Review
+          </button>
+
+                                </div>
+                            </li>
+
+                        </ul>
+                        <!--<div>
+                    <button style="width:300px;" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" onclick="location.href='Review.html'">Order Now</button>
+                </div>-->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>
