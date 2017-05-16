@@ -87,5 +87,7 @@ function calculatetotalprice(){
     {
         ttp+= +(p[i].innerText);
     } 
-    document.getElementById("alltotalprice").innerText = ttp+".00";
+    document.getElementById("alltotalprice").innerText = "Total: "+ttp+".00";
+    document.getElementById("alltotalprice").setAttribute("style","font-weight: bold; font-size: 15px;");
+
 }

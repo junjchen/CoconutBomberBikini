@@ -59,10 +59,10 @@
                         <div class="mdl-card__title mdl-card--expand">
                             <h2>Pay Invoice</h1>
                         </div>
-                        <div class="mdl-card__supporting-text">
-                            <div class="mdl-card__supporting-text">
+                        <div class="mdl-card__supporting-text" style="margin-bottom: -8%;">
+                            <div class="mdl-card__supporting-text" style="max-height: 400px; padding-top: 0px;margin-top: -10px;">
                                 <form action="#">
-                                    <div class="mdl-textfield mdl-js-textfield">
+                                    <div class="mdl-textfield mdl-js-textfield" style="padding-bottom: 0px;font-size: large;">
                                         <span>Pay amount: $</span>
                                         <span>17.00</span>
                                     </div>
@@ -92,7 +92,9 @@
                         </div>
                         <div class="mdl-card__actions mdl-card--border">
                             <div id="processbar2" class="mdl-progress mdl-js-progress mdl-progress__indeterminate" style="visibility:hidden;margin-top:0px; margin-bottom:10px;" ></div>
-                            <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="paybycard()"
+                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" onclick="location.href='mainorder.html'" style="margin-right: 36%;margin-left: 11%;margin-bottom: 2%;"
+                                type="submit"> Cancel </button>
+                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" onclick="paybycard()" style="margin-bottom: 2%;"
                                 type="submit"> Pay </button>
                             
                         </div>
