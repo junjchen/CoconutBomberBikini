@@ -30,6 +30,10 @@
     align-items: center;
 }
 
+.d-order-button {
+    background-color: rgb(156, 170, 246)
+}
+
 .d-nav__link button {
     margin-right: 20px;
 }
