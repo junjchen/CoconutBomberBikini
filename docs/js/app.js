@@ -253,24 +253,24 @@ function createBarChart(data) {
                 "value": data.calories / RI.calories
             },
             {
-                "name": "Fat",
-                "value": data.fat / RI.fat
-            },
-            {
-                "name": "Protein",
-                "value": data.protein / RI.protein
-            },
-            {
                 "name": "Sodium",
                 "value": data.sodium / RI.sodium
+            },
+            {
+                "name": "Cholesterol",
+                "value": data.cholesterol / RI.cholesterol
             },
             {
                 "name": "Carbonhydrates",
                 "value": data.carbonhydrates / RI.carbonhydrates
             },
             {
-                "name": "Cholesterol",
-                "value": data.cholesterol / RI.cholesterol
+                "name": "Fat",
+                "value": data.fat / RI.fat
+            },
+            {
+                "name": "Protein",
+                "value": data.protein / RI.protein
             }
         ],
         barContainer = d3.select('.js-d-bar-chart'),
