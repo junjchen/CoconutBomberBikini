@@ -314,8 +314,8 @@ function createBarChart(data) {
         {
             "name": "Fat",
             "id": 2,
-            "quantity": data.fat * 4,
-            "percentage": (100 * data.fat * 4 / totalFat).toFixed(2)
+            "quantity": data.fat * 9,
+            "percentage": (100 * data.fat * 9 / totalFat).toFixed(2)
         },
         {
             "name": "Carbonhydrates",
