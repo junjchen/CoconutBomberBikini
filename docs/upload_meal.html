@@ -10,7 +10,6 @@
             height: calc(100% - 64px);
             /*            background-color: aliceblue;*/
         }
-
     </style>
 </head>
 
@@ -18,7 +17,8 @@
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
         <header class="mdl-layout__header" style="background-color: white">
             <div class="menubar mdl-layout__header-row">
-                <img src="image/logo.png" alt="" style="height: inherit; margin: auto; cursor: pointer;" onclick="window.location.href = 'index.html'" />
+                <img src="image/logo.png" alt="" style="height: inherit; margin: auto; cursor: pointer;" onclick="window.location.href = 'index.html'"
+                />
             </div>
         </header>
 
@@ -29,8 +29,8 @@
                 <div class="mdl-grid">
                     <div class="mdl-layout-spacer"></div>
                     <div class="mdl-cell mdl-cell--6-col">
-                        <form action="#">
-                            <h4>What food are you serving?</h4>
+                        <form id="form">
+                            <h4>What meal are you serving?</h4>
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="margin-right: 10px">
                                 <input class="mdl-textfield__input" type="text" id="dishname" />
                                 <label class="mdl-textfield__label" for="dishname">Name of the dish</label>
@@ -39,7 +39,7 @@
                                 <input class="mdl-textfield__input" type="text" id="price" />
                                 <label class="mdl-textfield__label" for="price">Price</label>
                             </div>
-                            <h4>Show customers what your food looks like</h4>
+                            <h4>Show customers what your meal looks like</h4>
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--file">
                                 <input class="mdl-textfield__input" type="file" id="dishpic" />
                             </div>
@@ -72,7 +72,7 @@
                             <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" onclick="duplicate()">
                                 <i class="material-icons" >add</i>
                             </button>
-<!--                            <div class="mdl-layout-spacer"></div>-->
+                            <!--                            <div class="mdl-layout-spacer"></div>-->
                             <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="margin-top: 10px; float: right">
                                 Submit
                             </button>
@@ -110,6 +110,12 @@
             window.scrollTo(0, document.body.scrollHeight);
         }
 
+        var form = document.querySelector("#form")
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            alert("Thank you, your meal was uploaded, please get ready to receive orders!")
+            window.location.href = "index.html"
+        })
     </script>
 </body>
 
