@@ -10,6 +10,12 @@
     height: 56px;
 }
 
+.d-nav__button {
+    position: absolute;
+    left: 35px;
+    color: rgb(255, 64, 129) !important;
+}
+
 .d-nav__link {
     position: absolute;
     right: 35px;
