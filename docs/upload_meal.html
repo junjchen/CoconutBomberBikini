@@ -29,9 +29,6 @@
                 <div class="mdl-grid">
                     <div class="mdl-layout-spacer"></div>
                     <div class="mdl-cell mdl-cell--6-col">
-                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" onclick="window.location.href = 'index.html'">
-                            Go back
-                        </button>
                         <form id="form">
                             <h4>What meal are you serving?</h4>
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="margin-right: 10px">
@@ -72,7 +69,7 @@
                                 </div>
 
                             </div>
-                            <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" onclick="duplicate()">
+                            <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" onclick="duplicate">
                                 <i class="material-icons" >add</i>
                             </button>
                             <!--                            <div class="mdl-layout-spacer"></div>-->
@@ -80,6 +77,10 @@
                                 Submit
                             </button>
 
+                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" onclick="jump"
+                                style="margin-top: 10px; margin-right: 10px; float: right">
+                            Go back
+                        </button>
                         </form>
                     </div>
 
@@ -102,7 +103,8 @@
         var i = 0;
         var original = document.getElementById('duplicater');
 
-        function duplicate() {
+        function duplicate(e) {
+            e.preventDefault();
             var clone = original.cloneNode(true); // "deep" clone
             clone.id = "duplicater" + ++i;
             clone.style = "display: true";
@@ -111,6 +113,11 @@
 
             //****************************not working****************************
             window.scrollTo(0, document.body.scrollHeight);
+        }
+
+        function jump(e) {
+            e.preventDefault();
+            window.location.href = "index.html"
         }
 
         var form = document.querySelector("#form")
