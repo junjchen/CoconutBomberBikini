@@ -8,6 +8,7 @@
 
 .d-nav__logo {
     height: 56px;
+    cursor: pointer;
 }
 
 .d-nav__button {
