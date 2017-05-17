@@ -69,16 +69,16 @@
                                 </div>
 
                             </div>
-                            <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" onclick="duplicate">
+                            <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" onclick="duplicate()">
                                 <i class="material-icons" >add</i>
                             </button>
                             <!--                            <div class="mdl-layout-spacer"></div>-->
-                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="margin-top: 10px; float: right">
+                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="margin-top: 10px; float: right"
+                                onclick="add()">
                                 Submit
                             </button>
 
-                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" onclick="jump"
-                                style="margin-top: 10px; margin-right: 10px; float: right">
+                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" onclick="jump()" style="margin-top: 10px; margin-right: 10px; float: right">
                             Go back
                         </button>
                         </form>
@@ -100,31 +100,26 @@
 
 
     <script>
-        var i = 0;
-        var original = document.getElementById('duplicater');
-
-        function duplicate(e) {
-            e.preventDefault();
+        function duplicate() {
+            var original = document.getElementById('duplicater');
             var clone = original.cloneNode(true); // "deep" clone
-            clone.id = "duplicater" + ++i;
             clone.style = "display: true";
             original.parentNode.appendChild(clone);
-            componentHandler.upgradeElement(clone);
-
-            //****************************not working****************************
-            window.scrollTo(0, document.body.scrollHeight);
+            // componentHandler.upgradeElement(clone);
         }
 
-        function jump(e) {
-            e.preventDefault();
+        function jump() {
+            window.location.href = "index.html"
+        }
+
+        function add() {
+            alert("Thank you, your meal was uploaded, please get ready to receive orders!")
             window.location.href = "index.html"
         }
 
         var form = document.querySelector("#form")
-        form.addEventListener('submit', function (e) {
+        form.addEventListener("submit", function (e) {
             e.preventDefault();
-            alert("Thank you, your meal was uploaded, please get ready to receive orders!")
-            window.location.href = "index.html"
         })
     </script>
 </body>
