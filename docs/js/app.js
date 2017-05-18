@@ -16,6 +16,8 @@ function queryNutriApi(query) {
             //'x-app-key': '6fa130a6fe641daca440813fa94c98d0',
 
             // thirds
+            //'x-app-id': '9ea96386c',
+            //'x-app-key': '704f238a7e7488b9bb062876918346860',
         }),
         body: JSON.stringify({
             'query': query,
