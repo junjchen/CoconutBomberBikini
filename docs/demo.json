@@ -2,7 +2,7 @@
         "id": "1",
         "lat": 50.911134,
         "lon": -1.405621,
-        "name": "Vivian Home",
+        "name": "Vivian's Home",
         "image": "https://www.splendidtable.org/sites/default/files/styles/lede_image/public/cooking.jpg",
         "foods": [{
                 "id": "1.1",
@@ -45,7 +45,7 @@
         "id": "2",
         "lat": 50.906561,
         "lon": -1.405663,
-        "name": "Luis Home",
+        "name": "Luis' Home",
         "image": "http://www.lynchburgparksandrec.com/wp-content/uploads/2016/01/camaje-cooking-7.jpg",
         "foods": [{
             "id": "2.1",
