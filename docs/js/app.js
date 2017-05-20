@@ -377,6 +377,31 @@ $(function () {
             })
         })
 
+    for (var i = 0; i < 50; i++) {
+        var lat = 50.910 + Math.random() / 80
+        var lon = -1.409 + Math.random() / 70
+        L.marker([lat, lon], {
+            icon: L.icon({
+                iconUrl: 'images/ic_person_pin_circle_black_24px.svg',
+                iconSize: [35, 35],
+                className: 'd-map__icon'
+            })
+        }).addTo(map)
+    }
+
+
+    for (var i = 0; i < 50; i++) {
+        var lat = 50.910 + Math.random() / 70
+        var lon = -1.409 + Math.random() / 80
+        L.marker([lat, lon], {
+            icon: L.icon({
+                iconUrl: 'images/ic_person_pin_circle_black_red.svg',
+                iconSize: [35, 35],
+                className: 'd-map__icon--red'
+            })
+        }).addTo(map)
+    }
+
     Bacon.fromEvent($('.js-d-dialog__close-btn'), 'click').onValue(function () {
         document.querySelector('dialog').close();
     })
